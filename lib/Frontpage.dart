@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
 import 'studscreens/StudentSignin.dart';
 
-class Frontpage extends StatelessWidget {
+class Frontpage extends StatefulWidget {
+  @override
+  _FrontpageState createState() => _FrontpageState();
+}
+
+class _FrontpageState extends State<Frontpage> {
+
+
+  // new
+  Widget get _loadingView {
+    return new Center(
+      child: new CircularProgressIndicator(),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

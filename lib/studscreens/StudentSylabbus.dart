@@ -2,30 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class StudentSylabbus extends StatelessWidget {
-
-
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
         stream: Firestore.instance.collection('Sylabbus').snapshots(),
         builder: (context, snapshot) {
-
-            // ignore: missing_return
+          // ignore: missing_return
+          if (snapshot.hasData) {
             return ListView.builder(
                 itemCount: snapshot.data.documents.length,
                 itemBuilder: (context, index) {
                   DocumentSnapshot mypost = snapshot.data.documents[index];
 
                   return SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
                     child: Center(
+
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
                             'Subject:${mypost['Subject']}',
-                            style:
-                                TextStyle(fontSize: 20.0, color: Colors.blue),
+                            style: TextStyle(fontSize: 20.0, color: Colors.blue),
                           ),
                           Text(
                             'TextBook:${mypost['TextBook']}',
@@ -65,7 +63,9 @@ class StudentSylabbus extends StatelessWidget {
                     ),
                   );
                 });
-
+          } else {
+            return CircularProgressIndicator();
+          }
         });
     ;
   }

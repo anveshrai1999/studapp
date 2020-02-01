@@ -8,28 +8,33 @@ class StudentNotice extends StatelessWidget {
     return StreamBuilder(
         stream: Firestore.instance.collection('Student notice').snapshots(),
         builder: (context, snapshots) {
-          return ListView.builder(
-              itemCount: snapshots.data.documents.length,
-              itemBuilder: (context, index) {
-                DocumentSnapshot mypost = snapshots.data.documents[index];
+          if(snapshots.hasData) {
+            return ListView.builder(
+                itemCount: snapshots.data.documents.length,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot mypost = snapshots.data.documents[index];
 
-                return SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        '${mypost['notice']}',
-                        style: TextStyle(
-                            fontSize: 17.0, color: Colors.purpleAccent),
-                      ),
-                      SizedBox(
-                        height: 8,
-                      )
-                    ],
-                  ),
-                );
-              });
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          '${mypost['notice']}',
+                          style: TextStyle(
+                              fontSize: 17.0, color: Colors.purpleAccent),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        )
+                      ],
+                    ),
+                  );
+                });
+          }
+          else{
+            return CircularProgressIndicator();
+          }
         });
   }
 }
