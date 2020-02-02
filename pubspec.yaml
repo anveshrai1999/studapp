@@ -46,6 +46,10 @@ flutter:
   assets:
     - images/animated-student-image-0003.gif
     - images/animated-teacher-image-0002.gif
+    - images/background.png
+    - images/clock.png
+    - images/light-1.png
+    - images/light-2.png
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 
